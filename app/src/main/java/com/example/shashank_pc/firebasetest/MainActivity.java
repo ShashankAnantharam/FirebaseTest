@@ -34,6 +34,18 @@ public class MainActivity extends AppCompatActivity {
         final DatabaseReference reference = database.getReference("Message");
         flag=false;
 
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                textView.setText((String)dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
 
 
@@ -46,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 String text = editText.getText().toString();
 
 
-                textView.setText(text);
+//                textView.setText(text);
 
 
                 reference.setValue(text);
