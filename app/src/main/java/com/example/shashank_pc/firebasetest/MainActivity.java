@@ -32,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseDatabase database= FirebaseDatabase.getInstance();
         final DatabaseReference reference = database.getReference("Message");
+
+        FirebaseDatabase database1= FirebaseDatabase.getInstance();
+        FirebaseDatabase database2= FirebaseDatabase.getInstance();
+
+
         flag=false;
 
         reference.addValueEventListener(new ValueEventListener() {
