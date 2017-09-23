@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,7 +35,21 @@ public class MainActivity extends AppCompatActivity {
         final DatabaseReference reference = database.getReference("Message");
 
         FirebaseDatabase database1= FirebaseDatabase.getInstance();
-        FirebaseDatabase database2= FirebaseDatabase.getInstance();
+
+        DatabaseReference ref2 =database1.getReference("Message");
+        ref2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Toast.makeText(getApplicationContext(),(String)dataSnapshot.getValue(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+//        FirebaseDatabase database2= FirebaseDatabase.getInstance();
 
 
         flag=false;
