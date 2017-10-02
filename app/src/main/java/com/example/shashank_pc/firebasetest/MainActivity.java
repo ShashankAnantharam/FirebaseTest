@@ -1,6 +1,5 @@
 package com.example.shashank_pc.firebasetest;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -81,13 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
 //                textView.setText(text);
 
+
                 reference.setValue(text);
-
-                Intent intent = new Intent(MainActivity.this,Main2Activity.class);
-
-                startActivity(intent);
-
-
             }
         });
 
