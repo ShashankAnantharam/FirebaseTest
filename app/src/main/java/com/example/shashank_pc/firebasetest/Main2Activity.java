@@ -15,7 +15,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Main2Activity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +22,8 @@ public class Main2Activity extends AppCompatActivity {
 
         final TextView textView = (TextView) findViewById(R.id.textView1);
 
-
-        final DatabaseReference reference = MainActivity.database.getReference("Message");
+        FirebaseDatabase database= FirebaseDatabase.getInstance();
+        final DatabaseReference reference = database.getReference("Message");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -40,7 +39,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-        DatabaseReference ref2 =MainActivity.database.getReference("Message");
+        DatabaseReference ref2 =database.getReference("Message");
         ref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

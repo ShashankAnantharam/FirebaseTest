@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     EditText editText;
     boolean flag;
-    public static FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.button);
         editText = (EditText) findViewById(R.id.editText);
 
-        database= FirebaseDatabase.getInstance();
+        FirebaseDatabase database= FirebaseDatabase.getInstance();
         final DatabaseReference reference = database.getReference("Message");
 
 
