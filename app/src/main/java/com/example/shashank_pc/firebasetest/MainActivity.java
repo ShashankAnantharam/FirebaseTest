@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database= FirebaseDatabase.getInstance();
         final DatabaseReference reference = database.getReference("Message");
 
+        FirebaseDatabase database1= FirebaseDatabase.getInstance();
 
-
-        DatabaseReference ref2 =database.getReference("Message");
+        DatabaseReference ref2 =database1.getReference("Message");
         ref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
