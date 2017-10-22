@@ -1,17 +1,22 @@
 package com.example.shashank_pc.firebasetest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +42,11 @@ public class MainActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                textView.setText((String)dataSnapshot.getValue());
+
+
+
+                textView.setText((String)dataSnapshot.child("1").getValue());
+                Toast.makeText(getApplicationContext(),(String)dataSnapshot.child("1").getValue(),Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -45,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
 
 
 
@@ -61,7 +71,16 @@ public class MainActivity extends AppCompatActivity {
 //                textView.setText(text);
 
 
-                reference.setValue(text);
+         /*       Map<String,String> map = new HashMap<>();
+                map.put("1",text);
+                map.put("2",text);
+                reference.setValue(map);
+
+                */
+
+                Intent openMaps= new Intent();                  //If latitude and longitude are valid, create Intent openMaps
+                openMaps.setClass(getApplicationContext(),MapsActivity.class);      //set Class as MapsActivity (Google maps activity)
+                startActivity(openMaps);
             }
         });
 
