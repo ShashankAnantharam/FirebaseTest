@@ -145,13 +145,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 {
                     img = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
-                    Bitmap small_img = Bitmap.createScaledBitmap(img, 120, 120, false);
+                    Bitmap small_img = Bitmap.createScaledBitmap(img, 150, 150, false);
 
-                    Bitmap round_img= getRoundedRectBitmap(small_img);
+                    Bitmap round_img= getCircleBitmap(small_img);
+                    //Bitmap round_img= getRoundedRectBitmap(small_img);
 
                     marker.setIcon(BitmapDescriptorFactory.fromBitmap(round_img));
 
-                    //Bitmap round_img= getCircleBitmap(img);
+
                     marker.setAnchor(0.5f,0.5f);
 
                 }
