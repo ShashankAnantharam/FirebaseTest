@@ -26,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     boolean flag;
 
+
+    TextView textView2;
+    Button button2;
+    EditText editText2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +40,16 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.button);
         editText = (EditText) findViewById(R.id.editText);
 
+        textView2 = (TextView) findViewById(R.id.textView2);
+        button2 = (Button) findViewById(R.id.button2);
+        editText2 = (EditText) findViewById(R.id.editText2);
+
         FirebaseDatabase database= FirebaseDatabase.getInstance();
         final DatabaseReference reference = database.getReference("Message");
         flag=false;
+
+        FirebaseDatabase db2 = FirebaseDatabase.getInstance("https://testproject-5baad-5ffa4.firebaseio.com/");
+        final DatabaseReference ref2 = db2.getReference("Message");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -54,6 +66,20 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        ref2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                textView2.setText((String)dataSnapshot.child("1").getValue());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
 
 //New database reference testproject-5baad-5ffa4
@@ -76,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 map.put("2",text);
                 reference.setValue(map);
 
-                
+
 
       //          Intent openMaps= new Intent();                  //If latitude and longitude are valid, create Intent openMaps
        //         openMaps.setClass(getApplicationContext(),MapsActivity.class);      //set Class as MapsActivity (Google maps activity)
@@ -84,6 +110,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = editText2.getText().toString();
+
+
+//                textView.setText(text);
+
+
+                Map<String,String> map = new HashMap<>();
+                map.put("1",text);
+
+                ref2.setValue(map);
+            }
+        });
 
 
     }
