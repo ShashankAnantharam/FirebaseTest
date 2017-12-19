@@ -71,12 +71,12 @@ public class MainActivity extends AppCompatActivity {
 //                textView.setText(text);
 
 
-         /*       Map<String,String> map = new HashMap<>();
+                Map<String,String> map = new HashMap<>();
                 map.put("1",text);
                 map.put("2",text);
                 reference.setValue(map);
 
-                */
+                
 
       //          Intent openMaps= new Intent();                  //If latitude and longitude are valid, create Intent openMaps
        //         openMaps.setClass(getApplicationContext(),MapsActivity.class);      //set Class as MapsActivity (Google maps activity)
