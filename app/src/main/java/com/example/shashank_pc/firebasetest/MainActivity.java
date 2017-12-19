@@ -78,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
                 */
 
-                Intent openMaps= new Intent();                  //If latitude and longitude are valid, create Intent openMaps
-                openMaps.setClass(getApplicationContext(),MapsActivity.class);      //set Class as MapsActivity (Google maps activity)
-                startActivity(openMaps);
+      //          Intent openMaps= new Intent();                  //If latitude and longitude are valid, create Intent openMaps
+       //         openMaps.setClass(getApplicationContext(),MapsActivity.class);      //set Class as MapsActivity (Google maps activity)
+       //         startActivity(openMaps);
             }
         });
 
