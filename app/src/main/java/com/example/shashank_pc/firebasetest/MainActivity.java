@@ -16,7 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -40,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
     EditText editText2;
 
     FirebaseFirestore firestore;
+
+    private List<FirebaseDatabase> DB= new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
         flag=false;
         count=0;
 
-        List<FirebaseDatabase> DB= new ArrayList<>();
+        for(int i=0;i<5;i++)
+            DB.add(null);
         firestore = FirebaseFirestore.getInstance();
         firestore.collection("DB").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -70,6 +77,20 @@ public class MainActivity extends AppCompatActivity {
                     switch (dc.getType()) {
                         case ADDED:
                             Toast.makeText(getApplicationContext(),dc.getDocument().getId(),Toast.LENGTH_SHORT).show();
+
+                                DocumentSnapshot d = dc.getDocument();
+                                int i=Integer.parseInt(d.getId());
+                                Map<String,Object> m = d.getData();
+                                String link= (String)m.get("link");
+                                if(link.equals(""))
+                                {
+                                    Toast.makeText(getApplicationContext(),"Yes",Toast.LENGTH_SHORT).show();
+                                    DB.add(i-1,FirebaseDatabase.getInstance());
+                                }
+                                else
+                                {
+
+                                }
                             break;
                         case MODIFIED:
 
@@ -81,7 +102,25 @@ public class MainActivity extends AppCompatActivity {
             }
         }});
 
+        
+        button.setOnClickListener(new View.OnClickListener() {
 
+
+            @Override
+            public void onClick(View v) {
+                String text = editText.getText().toString();
+
+                for(int i=0;i<DB.size();i++)
+                {
+                    if(DB.get(i)!=null)
+                    {
+                        DatabaseReference ref= DB.get(i).getReference("Message");
+                        ref.setValue(text);
+                    }
+                }
+
+            }
+        });
 
 
 
