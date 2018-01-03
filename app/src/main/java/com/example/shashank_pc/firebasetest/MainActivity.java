@@ -86,11 +86,20 @@ public class MainActivity extends AppCompatActivity {
                                 String link= (String)m.get("link");
                                 if(link.equals(""))
                                 {
-                                    Toast.makeText(getApplicationContext(),"Yes",Toast.LENGTH_SHORT).show();
+                //                    Toast.makeText(getApplicationContext(),"Yes",Toast.LENGTH_SHORT).show();
                                     DB.add(i-1,FirebaseDatabase.getInstance());
                                 }
                                 else
                                 {
+                               //     Toast.makeText(getApplicationContext(),link,Toast.LENGTH_SHORT).show();
+                                       try
+                                       {
+                                           DB.add(i-1,FirebaseDatabase.getInstance(link));
+                                       }
+                                       catch(Exception E)
+                                       {
+                                 //          Toast.makeText(getApplicationContext(),E.getMessage(),Toast.LENGTH_LONG).show();
+                                       }
                                         firestore.collection("DB").document(d.getId()).delete().addOnFailureListener(
                                                 new OnFailureListener() {
                                                     @Override
@@ -124,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     if(DB.get(i)!=null)
                     {
+                    //    Toast.makeText(getApplicationContext(),Integer.toString(i),Toast.LENGTH_LONG).show();
                         DatabaseReference ref= DB.get(i).getReference("Message");
                         ref.setValue(text);
                     }
