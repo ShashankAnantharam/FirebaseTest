@@ -66,24 +66,31 @@ public class MainActivity extends AppCompatActivity {
         flag=false;
         count=0;
 
+        //Initialize DB array
         for(int i=0;i<5;i++)
             DB.add(null);
+
+        //Connecting to Firestore
         firestore = FirebaseFirestore.getInstance();
+
+        //Reading Firestore Collection
         firestore.collection("DB").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                    if(e!=null)
+                    if(e!=null)     //Exception
                             return;
 
+                //Iterate through all Firestore document changes
                 for(DocumentChange dc : documentSnapshots.getDocumentChanges()) {
                     switch (dc.getType()) {
                         case ADDED:
                             Toast.makeText(getApplicationContext(),dc.getDocument().getId(),Toast.LENGTH_SHORT).show();
 
+                            //Get document
                                 DocumentSnapshot d = dc.getDocument();
-                                int i=Integer.parseInt(d.getId());
-                                Map<String,Object> m = d.getData();
-                                String link= (String)m.get("link");
+                                int i=Integer.parseInt(d.getId());  //Get doc ID
+                                Map<String,Object> m = d.getData(); //Get doc Data
+                                String link= (String)m.get("link");     //Get link from doc Data
                                 if(link.equals(""))
                                 {
                 //                    Toast.makeText(getApplicationContext(),"Yes",Toast.LENGTH_SHORT).show();
@@ -91,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 else
                                 {
-                               //     Toast.makeText(getApplicationContext(),link,Toast.LENGTH_SHORT).show();
+                               //     Add firebase database to array
                                        try
                                        {
                                            DB.add(i-1,FirebaseDatabase.getInstance(link));
